@@ -82,8 +82,14 @@ async function search() {
 
   // Überprüfung, ob es passende Beiträge gibt
   for(let i=0; i<postdata.length; i++) {
-    if(postdata[i].text.includes(text.value)) {
-      postFound = true;
+
+    const textArr = postdata[i].text.toLowerCase().split(" ");
+    const textLow = text.value.toLowerCase();
+
+    for(let i=0; i<textArr.length; i++) {
+      if(textLow === textArr[i]) {
+        postFound = true;
+      }
     }
   }
 

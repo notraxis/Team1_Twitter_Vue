@@ -29,7 +29,12 @@
       </div>
 
       <div class="postLike">
-        <span class="cursor-pointer" @click="like">{{ heart }}</span>
+        <span
+            class="cursor-pointer"
+            :class="{liked: isLiked}"
+            @click="like">
+          {{ heart }}
+        </span>
         <span class="ml-1">{{ post.likes }}</span>
       </div>
     </div>
@@ -44,7 +49,7 @@
 
 <script setup lang="ts">
 import Comment from "./comment.vue";
-import {onMounted, ref} from 'vue';
+import {computed, onMounted, ref} from 'vue';
 import router from "../../router";
 
 interface PostType {
@@ -67,7 +72,7 @@ const props = defineProps<{
 
 const currentDate = ref("");
 const commentsCount = ref("0");
-const heart = ref(isLiked());
+const heart = ref("❤");
 const rawHtml = ref("");
 const rawHtmlComment = ref("");
 const showComment = ref(false);
@@ -161,7 +166,6 @@ async function like() {
     props.post.likes -= 1;
     likedByArr = likedByArr.filter((f) => { return f !== storageUser.id});
     props.post.likedBy = JSON.stringify(likedByArr);
-    heart.value = "❤";
 
     newLike = {
       userID: storageUser.id,
@@ -173,7 +177,6 @@ async function like() {
     props.post.likes += 1;
     likedByArr.push(storageUser.id);
     props.post.likedBy = JSON.stringify(likedByArr);
-    heart.value = "❤️";
 
     newLike = {
       userID: storageUser.id,
@@ -193,18 +196,17 @@ async function like() {
 }
 
 // Like Symbol färben
-function isLiked() {
+const isLiked = computed(() => {
   const storageUser = JSON.parse(localStorage.getItem('loggedInUser'));
-
-  var heart = "❤";
 
   const likedByArr = JSON.parse(props.post.likedBy);
 
   if (likedByArr.find(x => x === storageUser.id)) {
-    heart = "❤️";
+    return true;
+  }else {
+    return false;
   }
-  return heart;
-}
+})
 
 // URL anpassen mit Suchbegriff (User)
 function userUrlQuery(data) {
@@ -268,6 +270,10 @@ function showComments() {
 }
 
 .postLike:hover {
+  color: red;
+}
+
+.liked{
   color: red;
 }
 

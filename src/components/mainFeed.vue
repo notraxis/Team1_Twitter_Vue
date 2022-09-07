@@ -46,9 +46,15 @@ onMounted(async () => {
       return;
     }
     // Beiträge zu Text ermitteln
-    for (let i = 0; i < postUser.value.length; i++) {
-      if (postUser.value[i].text.includes(search)) {
-        posts.push(postUser.value[i]);
+    for (var i = 0; i < postUser.value.length; i++) {
+
+      const textArr = postUser.value[i].text.toLowerCase().split(" ");
+      const textLow = search.toLowerCase();
+
+      for(let ix=0; ix<textArr.length; ix++) {
+        if(textLow === textArr[ix]) {
+          posts.push(postUser.value[i]);
+        }
       }
     }
     postUser.value = posts;

@@ -3,7 +3,7 @@
   <div class="flex flex-col text-[18px] font-bold">
     <!--      navUserImage-->
     <div class="flex flex-row items-center"
-      :class="imgNavbar ? 'mb-[5px]' : ''">
+      :class="{'mb-[5px]': imgNavbar}">
       <!--        loggedInUserImage-->
       <span>
           <img

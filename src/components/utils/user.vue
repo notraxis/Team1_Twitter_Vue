@@ -39,6 +39,7 @@
 import Button from "./button.vue";
 import router from '../../router';
 import {ref} from 'vue';
+// import {useUserStore} from '../../store/loggedInUser.js';
 
 const props = defineProps<{
   userNavbar?: boolean,

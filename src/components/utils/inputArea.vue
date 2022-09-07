@@ -21,7 +21,7 @@
           :rows="rows"
           tabindex="1"
           autofocus
-          @keyup.enter="savePost">
+          @keyup.enter="save">
       </textarea>
       <div class="secondRow">
         <input-file
@@ -90,9 +90,11 @@ if (props.rows) {
 // entsprechende Speicher-Methode ausführen
 function save() {
   if (props.inputPost) {
+    console.log("post")
     savePost();
   }
   if (props.inputComment) {
+    console.log("comment")
     saveComment();
   }
 }

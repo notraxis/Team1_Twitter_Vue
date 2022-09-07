@@ -36,12 +36,14 @@
 import InputText from "../components/utils/inputText.vue";
 import Button from "../components/utils/button.vue";
 import router from '../router';
-import {ref} from 'vue';
+import {computed, ref} from 'vue';
+import {useUserStore} from '../store/loggedInUser';
 
 // HTML Titel setzen
 document.title = "Team1 - Login"
 
 // Referenzen
+const storeUser = useUserStore();
 const username = ref("");
 const passwort = ref("");
 
@@ -87,8 +89,18 @@ async function login() {
     return;
   }
 
-  // User Objekt in Local Storage speichern
+  // User Objekt in Pinia und Local Storage speichern
   const checkedUserBody = await checkedUser.json();
+
+  // Pinia
+  storeUser.id        = checkedUserBody.id;
+  storeUser.vorname   = checkedUserBody.vorname;
+  storeUser.nachname  = checkedUserBody.nachname;
+  storeUser.username  = checkedUserBody.username;
+  storeUser.password  = checkedUserBody.password;
+  storeUser.userimage = checkedUserBody.userimage;
+
+  // Local Storage
   localStorage.setItem('loggedInUser', JSON.stringify(checkedUserBody));
 
   // zu Home Seite springen

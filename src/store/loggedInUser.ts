@@ -9,8 +9,8 @@ interface User {
     userimage?: string
 }
 
-export const useUserStore = defineStore({
-    id: 'loggedInUser',
+export const useUserStore = defineStore('loggedInUser', {
+    persist: true,
     state: (): User => ({
         id: undefined,
         vorname: "",

@@ -54,11 +54,14 @@ const props = defineProps<{
 
 // eingeloggten User setzen
 const loggedInUser  = JSON.parse(localStorage.getItem('loggedInUser'));
+const storeUser = useUserStore();
 const name          = ref("");
 const username      = ref("");
 const loggedInUserImage = ref("");
-name.value          = loggedInUser.vorname + " " + loggedInUser.nachname
-username.value      = loggedInUser.username
+name.value          = storeUser.vorname + " " + storeUser.nachname
+username.value      = storeUser.username
+
+
 
 // Logout
 function logout() {

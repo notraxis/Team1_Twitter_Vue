@@ -67,7 +67,7 @@ label[for="inputImage"] {
   border-radius: 10px;
   cursor: pointer;
   font-size: 1rem;
-  width: 200px;
+  min-width: 200px;
   text-align: center;
 }
 

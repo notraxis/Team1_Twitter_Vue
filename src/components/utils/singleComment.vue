@@ -7,7 +7,7 @@
             v-if="answer.userimage"
             :src="answer.userimage"/>
       </span>
-      <span class="commentUsername" @click="userUrlQuery(answer.username)">
+      <span class="commentUsername">
         {{ "@" + props.answer.username }}
       </span>
     </div>
@@ -134,7 +134,6 @@ function userUrlQuery(data) {
 .commentUsername {
   color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
-  cursor: pointer;
 }
 
 .commentText {

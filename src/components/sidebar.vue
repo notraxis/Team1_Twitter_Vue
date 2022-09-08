@@ -34,7 +34,7 @@ const text = ref("");
 
 onMounted(async () => {
   // Trends ermitteln und Trends älter als 1 Woche löschen
-  let allTrendsArr = await fetch("http://localhost:8000/trends").then((res) => res.json());
+  let allTrendsArr = await fetch("http://10.11.45.177:8000/trends").then((res) => res.json());
 
   var trendsArr = [];
 
@@ -69,7 +69,7 @@ function filterTrends(data) {
 
 // Suchfunktion
 async function search() {
-  const postdata = await fetch("http://localhost:8000/postsWithUser").then((res) => res.json());
+  const postdata = await fetch("http://10.11.45.177:8000/postsWithUser").then((res) => res.json());
   postdata.reverse();
 
   let postFound = false;
@@ -110,7 +110,7 @@ async function searchUser(input, postData) {
   // Wenn Posts nicht übergeben -> Posts ermitteln
   let postdata;
   if (!postData) {
-    postdata = await fetch("http://localhost:8000/postsWithUser").then((res) => res.json());
+    postdata = await fetch("http://10.11.45.177:8000/postsWithUser").then((res) => res.json());
     postdata.reverse();
   } else {
     postdata = postData;
@@ -127,7 +127,7 @@ async function searchUser(input, postData) {
   }
 
   // Userdaten ermitteln
-  const userdata = await fetch("http://localhost:8000/user").then((res) => res.json());
+  const userdata = await fetch("http://10.11.45.177:8000/user").then((res) => res.json());
 
   let postFound = false;
 

@@ -32,7 +32,7 @@ const props = defineProps<{
 const answersUser = ref([]);
 
 const reload = async () => {
-  answersUser.value = await fetch("http://localhost:8000/answersWithUser?postID=" + props.postID).then((res) => res.json());
+  answersUser.value = await fetch("http://10.11.45.177:8000/answersWithUser?postID=" + props.postID).then((res) => res.json());
   answersUser.value.reverse();
 
   props.cc();

@@ -157,7 +157,7 @@ function formatDate(date) {
 
 // Anzahl Kommentare zu Posts ermitteln
 async function countCommentsToPost() {
-  const answers = await fetch("http://localhost:8000/answers?postID=" + props.post.id).then((res) => res.json());
+  const answers = await fetch("http://10.11.45.177:8000/answers?postID=" + props.post.id).then((res) => res.json());
   return answers.length;
 }
 
@@ -194,7 +194,7 @@ async function like() {
     }
   }
 
-  await fetch('http://localhost:8000/posts', {
+  await fetch('http://10.11.45.177:8000/posts', {
     method: 'PUT',
     headers: {
       'Accept': 'application/json, text/plain, */*',

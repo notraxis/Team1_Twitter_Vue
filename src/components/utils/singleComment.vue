@@ -4,18 +4,25 @@
     <div class="commentUser">
       <span class="commentUserImage">
         <img
-          v-if="answer.userimage"
-          :src="answer.userimage" />
+            v-if="answer.userimage"
+            :src="answer.userimage"/>
       </span>
       <span class="commentUsername" @click="userUrlQuery(answer.username)">
-        {{"@" + props.answer.username}}
+        {{ "@" + props.answer.username }}
       </span>
     </div>
 
-    <div class="commentText" v-html="rawHtml"></div>
+    <div class="commentText" v-html="': ' + answer.text.split(' ').map(e => {
+      if (e.startsWith('#')) {
+        return `<span class='text-[#F59E0B]'>${e}</span>`
+      } else if (e.startsWith('@')) {
+        return `<span class='text-[#F59E0B]'>${e}</span>`
+      } else return e
+      }).join(' ')">
+    </div>
 
     <div class="commentDate">
-      {{answerDate}}
+      {{ answerDate }}
     </div>
   </div>
 
@@ -41,17 +48,6 @@ const props = defineProps<{
 }>()
 
 const answerDate = ref("");
-const rawHtml = ref("");
-
-// Text anpassen
-rawHtml.value = props.answer.text.split(' ').map(e => {
-  if (e.startsWith("#")) {
-    return `<span class="text-[#F59E0B]">${e}</span>`
-  } else if (e.startsWith('@')) {
-    return `<span class="text-[#F59E0B]">${e}</span>`
-  } else return e
-}).join(" ");
-rawHtml.value = ": " + rawHtml.value;
 
 // Datum von Antwort und aktuelles Datum
 const dateAnswer = new Date(props.answer.date);
@@ -152,7 +148,7 @@ function userUrlQuery(data) {
   font-size: 14px;
 }
 
-.commentUserImage img{
+.commentUserImage img {
   width: 30px;
   height: 30px;
   border-radius: 50%;

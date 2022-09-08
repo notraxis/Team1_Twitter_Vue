@@ -7,6 +7,7 @@
           :rows="3"
           button-width="w-[100px]"
           input-comment
+          @save="reload"
           :post-i-d="props.postID"/>
     </div>
     <div class="allComments">
@@ -29,9 +30,13 @@ const props = defineProps<{
 
 const answersUser = ref([]);
 
-onMounted(async () => {
+const reload = async () => {
   answersUser.value = await fetch("http://localhost:8000/answersWithUser?postID=" + props.postID).then((res) => res.json());
   answersUser.value.reverse();
+}
+
+onMounted(async () => {
+  reload()
 })
 
 </script>

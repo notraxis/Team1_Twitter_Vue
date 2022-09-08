@@ -13,8 +13,8 @@
                   imgCommentInput ? 'w-[40px] h-[40px]' : 'w-[60px] h-[60px]',
                   imgComment ? 'w-[30px] h-[30px] !mr-[5px]' : 'w-[60px] h-[60px]'
                   ]"
-              v-if="loggedInUser.userimage"
-              :src="loggedInUser.userimage"
+              v-if="storeUser.userimage"
+              :src="storeUser.userimage"
               ref="loggedInUserImage"
               @click="easterEgg"/>
       </span>

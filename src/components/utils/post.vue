@@ -24,7 +24,12 @@
 
     <div class="postActions">
       <div class="postComment">
-        <span class="cursor-pointer" @click="showComments">💬</span>
+        <span
+            class="cursor-pointer"
+            :class="{commentOpen : commentsOpen}"
+            @click="showComments">
+          {{ commentBubble }}
+        </span>
         <span class="ml-1">{{ commentsCount }}</span>
       </div>
 
@@ -39,7 +44,6 @@
       </div>
     </div>
 
-    <div class="commentArea" v-html="rawHtmlComment"></div>
     <Comment
         :post-i-d="post.id"
         v-if="showComment"/>
@@ -73,6 +77,7 @@ const props = defineProps<{
 const currentDate = ref("");
 const commentsCount = ref("0");
 const heart = ref("❤");
+const commentBubble = ref("💬");
 const rawHtml = ref("");
 const rawHtmlComment = ref("");
 const showComment = ref(false);
@@ -164,7 +169,9 @@ async function like() {
   if (likedByArr.find(x => x === storageUser.id)) {
     // User hat bereits geliked -> Like zurücknehmen
     props.post.likes -= 1;
-    likedByArr = likedByArr.filter((f) => { return f !== storageUser.id});
+    likedByArr = likedByArr.filter((f) => {
+      return f !== storageUser.id
+    });
     props.post.likedBy = JSON.stringify(likedByArr);
 
     newLike = {
@@ -203,7 +210,7 @@ const isLiked = computed(() => {
 
   if (likedByArr.find(x => x === storageUser.id)) {
     return true;
-  }else {
+  } else {
     return false;
   }
 })
@@ -219,6 +226,14 @@ function userUrlQuery(data) {
 function showComments() {
   showComment.value = !showComment.value;
 }
+
+const commentsOpen = computed(() => {
+  if (showComment.value === true) {
+    return true;
+  } else {
+    return false;
+  }
+})
 
 </script>
 
@@ -273,8 +288,12 @@ function showComments() {
   color: red;
 }
 
-.liked{
+.liked {
   color: red;
+}
+
+.commentOpen {
+  color: lightskyblue;
 }
 
 .postText {

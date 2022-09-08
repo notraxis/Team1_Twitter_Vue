@@ -64,7 +64,8 @@ const props = defineProps<{
   buttonWidth?: string,
   placeholder?: string,
   rows?: number,
-  postID?: number
+  postID?: number,
+  save?: Function
 }>()
 
 // Referenzen
@@ -90,14 +91,14 @@ if (props.rows) {
 // entsprechende Speicher-Methode ausführen
 function save() {
   if (props.inputPost) {
-    console.log("post")
     savePost();
   }
   if (props.inputComment) {
-    console.log("comment")
     saveComment();
   }
 }
+
+const emit = defineEmits(['save']);
 
 // Post speichern
 async function savePost() {
@@ -193,7 +194,9 @@ async function saveComment() {
     user_id: userStorage.id,
     text: text,
     date: new Date(),
+
   }
+
 
   // Post Request an Server -> answers
   await fetch('http://localhost:8000/answers', {
@@ -206,11 +209,14 @@ async function saveComment() {
   })
 
   // Anzeige aktualisieren
-  location.reload();
+  //location.reload();
 
   // Inputs zurücksetzen
   inputText.value = '';
   verfuegbar.value = "280/280 verfügbar";
+
+
+  emit("save")
 }
 
 // Zähler verfügbare Zeichen

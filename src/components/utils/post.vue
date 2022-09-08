@@ -30,7 +30,9 @@
             @click="showComments">
           {{ commentBubble }}
         </span>
-        <span class="ml-1">{{ commentsCount }}</span>
+        <span class="ml-1">
+          {{ commentsCount }}
+        </span>
       </div>
 
       <div class="postLike">
@@ -46,7 +48,8 @@
 
     <Comment
         :post-i-d="post.id"
-        v-if="showComment"/>
+        v-if="showComment"
+        :cc="async () => commentsCount = await countCommentsToPost()"/>
 
   </div>
 </template>
@@ -75,11 +78,10 @@ const props = defineProps<{
 }>()
 
 const currentDate = ref("");
-const commentsCount = ref("0");
+const commentsCount = ref(countCommentsToPost);
 const heart = ref("❤");
 const commentBubble = ref("💬");
 const rawHtml = ref("");
-const rawHtmlComment = ref("");
 const showComment = ref(false);
 
 // Text anpassen

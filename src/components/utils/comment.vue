@@ -26,6 +26,7 @@ import {onMounted, ref} from "vue";
 
 const props = defineProps<{
   postID?: number
+  cc: Function
 }>()
 
 const answersUser = ref([]);
@@ -33,6 +34,8 @@ const answersUser = ref([]);
 const reload = async () => {
   answersUser.value = await fetch("http://localhost:8000/answersWithUser?postID=" + props.postID).then((res) => res.json());
   answersUser.value.reverse();
+
+  props.cc();
 }
 
 onMounted(async () => {

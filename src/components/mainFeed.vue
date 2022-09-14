@@ -26,7 +26,7 @@ watch(
 )
 
 onMounted(async () => {
-  postUser.value = await fetch("http://10.11.45.177:8000/postsWithUser").then((res) => res.json());
+  postUser.value = await fetch("http://localhost:8000/postsWithUser").then((res) => res.json());
   postUser.value.reverse();
 
   const search = route.query.search as string;

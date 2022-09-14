@@ -130,7 +130,7 @@ async function savePost() {
   };
 
   // Post Request an Server -> Posts
-  await fetch('http://10.11.45.177:8000/posts', {
+  await fetch('http://localhost:8000/posts', {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -157,7 +157,7 @@ async function savePost() {
 
   // Post Request an Server -> Trends
   if (newTrendsArr.length !== 0) {
-    await fetch('http://10.11.45.177:8000/trends', {
+    await fetch('http://localhost:8000/trends', {
       method: 'POST',
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -199,7 +199,7 @@ async function saveComment() {
 
 
   // Post Request an Server -> answers
-  await fetch('http://10.11.45.177:8000/answers', {
+  await fetch('http://localhost:8000/answers', {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',

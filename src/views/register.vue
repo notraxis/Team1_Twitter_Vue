@@ -115,7 +115,7 @@ async function registerUser() {
   };
 
   // Post Request an Server
-  await fetch('http://10.11.45.177:8000/user', {
+  await fetch('http://localhost:8000/user', {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -135,7 +135,7 @@ async function registerUser() {
 
 // Überprüfung, ob Username bereits existiert
 async function checkUsername() {
-  const userdata = await fetch("http://10.11.45.177:8000/user").then((res) => res.json());
+  const userdata = await fetch("http://localhost:8000/user").then((res) => res.json());
 
   if (userdata.find((x: { username: string; }) => x.username === username.value)) {
     alert("Username existiert bereits!");

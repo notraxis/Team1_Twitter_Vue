@@ -66,7 +66,7 @@ async function login() {
   }
 
   // Login Route - Login Überprüfung
-  const checkedUser = await fetch('http://10.11.45.177:8000/login', {
+  const checkedUser = await fetch('http://localhost:8000/login', {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
